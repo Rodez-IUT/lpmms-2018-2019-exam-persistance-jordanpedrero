@@ -17,6 +17,8 @@ public class Project {
 
     private String description;
 
+    @Version
+    private Long version;
 
     @NotNull
     @ManyToOne(cascade = {CascadeType.PERSIST})
@@ -27,6 +29,12 @@ public class Project {
     public Project(String title, String description) {
         this.title = title;
         this.description = description;
+    }
+    
+    public Project(String title, String description, Long version) {
+        this.title = title;
+        this.description = description;
+        this.version = version;
     }
 
     public Long getId() {
@@ -56,4 +64,12 @@ public class Project {
     public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
     }
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 }

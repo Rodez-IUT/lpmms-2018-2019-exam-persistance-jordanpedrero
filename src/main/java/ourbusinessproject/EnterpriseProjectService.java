@@ -20,14 +20,22 @@ public class EnterpriseProjectService {
         project.setEnterprise(enterprise);
         enterprise.addProject(project);
         entityManager.persist(project);
+        
+        /** *
+         * Question 1.2 )
+         * La méthode flush permet d'exécuter des instructions directement sans passer par 
+         * le cache SQL ou attendre un commit.
+         * Dans notre cas, elle permet d'envoyer les données des projets pour les utliser 
+         * de suite après pour les entreprises.
+         ** */
         entityManager.flush();
         return project;
     }
 
     public Enterprise saveEnterprise(Enterprise enterprise) {
-        entityManager.persist(enterprise);
+        
         entityManager.flush();
-        return enterprise;
+        return entityManager.merge(enterprise);
     }
 
     public Project findProjectById(Long id) {
